@@ -7,6 +7,7 @@ import connectDB from "./config/db.js";
 import loginRoute from './routes/loginRoute.js';
 import registerRoute from './routes/registerRoute.js';
 import prodctRoute from './routes/productRoute.js';
+import CartRoute from './routes/CartRoute.js';
 
 dotenv.config();
 
@@ -25,7 +26,7 @@ connectDB();
 app.use("/auth", registerRoute);
 app.use("/auth", loginRoute);
 app.use("/Product" , prodctRoute);
-
+app.use("/Cart" , CartRoute);
 app.listen(8000, () => {
     console.log("server is running on port 8000");
 });
