@@ -1,12 +1,13 @@
 {
-  "name": "server.js",
+  "name": "lemon-daze-backend",
   "version": "1.0.0",
   "description": "Rest Api for the eccomerce",
   "license": "ISC",
   "author": "",
   "type": "module",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
