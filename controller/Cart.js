@@ -9,7 +9,10 @@ export const CartController  = async (req, res) => {
     const { userId, productId } = req.body;
 
     let cart = await Cart.findOne({ userId });
-
+    let cartItem = await Cart.findOne({ userId , productId});
+    if (cartItem) {
+        return res.status(201).json({message: "Product already exists in cart"});
+    }
     if (cart) {
       // add new product to existing cart
       cart.products.push({ productId });
