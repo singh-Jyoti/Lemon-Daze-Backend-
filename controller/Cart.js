@@ -4,14 +4,18 @@ import mongoose from "mongoose";
 import { Cart } from "../models/CartModel.js";
 import { Product } from "../models/productModel.js";
 
-export const CartController  = async (req, res) => {
+export const CartController = async (req, res) => {
   try {
     const { userId, productId } = req.body;
 
     let cart = await Cart.findOne({ userId });
-    let cartItem = await Cart.findOne({ userId , productId});
+    let cartItem = await Cart.findOne({
+      userId,
+      'products.productId': productId
+    });
+
     if (cartItem) {
-        return res.status(201).json({message: "Product already exists in cart"});
+      return res.status(201).json({ message: "Product already exists in cart" });
     }
     if (cart) {
       // add new product to existing cart
@@ -46,11 +50,11 @@ export const getCart = async (req, res) => {
     const cart = await Cart.findOne({ userId });
     const allcartproduct = [];
     if (cart) {
-        for (const item of cart.products) {
-            const p = await Product.findById(item.productId);
-            allcartproduct.push(p);
-        }
-        return res.status(200).json(allcartproduct);
+      for (const item of cart.products) {
+        const p = await Product.findById(item.productId);
+        allcartproduct.push(p);
+      }
+      return res.status(200).json(allcartproduct);
     } else {
       return res.status(404).json({ message: "Cart not found" });
     }
